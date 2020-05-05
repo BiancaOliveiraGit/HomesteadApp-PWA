@@ -1,0 +1,22 @@
+// Setup Service work https://codelabs.developers.google.com/codelabs/your-first-pwapp/#4
+
+
+//installing webpack having errors with installing as needs bootstrap dependencies so trying
+// npm install bootstrap jquery popper.js --save
+// then install
+// npm install -D webpack webpack-cli (this now needs typescript depenencies)
+// try to install 
+// npm install -D @babel/core babel-loader
+// npm install --save-dev typescript ts-loader
+
+DONE
+---------
+install azure service extension onto VScode
+Not much luck with installing webpack dev server
+
+TODO
+----------
+## setup manifest file for pwa
+## test with lighthouse to see what missing for pwa
+## setup app shell landing page
+## deploy app to azure

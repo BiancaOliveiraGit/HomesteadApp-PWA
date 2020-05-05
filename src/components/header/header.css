@@ -1,0 +1,17 @@
+.header-title {
+    color:  rgba(146, 170, 170, 1);
+    font-weight: bold;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    display: flex;
+    height: 70px;
+    background-image: linear-gradient(to right, rgba(114, 200, 158, 0.3), rgba(114, 200, 158, 1));
+}
+
+#online-btn {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    border-radius: 30px;
+}

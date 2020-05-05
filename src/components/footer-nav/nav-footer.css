@@ -1,0 +1,53 @@
+
+
+#nav-footer {
+    /* margin: 15px; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /*will center icons horizontally*/
+    align-content: center;
+    background-color: #72C89E;
+    height: 50px;
+    color: rgb(101, 129, 129);
+}
+
+  #iconFooter  {
+    stroke:  #87b5b0; 
+    stroke-width: 10;
+  }
+
+  @keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+
+  #iconFooter :hover {
+    cursor: pointer;
+    animation: bounce 1s;
+    stroke-width: 25;
+    stroke:  #96c7c1; 
+    filter: drop-shadow(20px 10px 4px red) /*not working*/
+  }
+
+/*
+TODO 
+## nav-footer
+--
+## header
+change to image
+
+
+next ... set up webpack or gulp
+*/

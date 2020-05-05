@@ -1,0 +1,44 @@
+body {
+    background-color: #C4DFDD;
+  }
+
+.season-notice-completed{
+    background-color: rgba(218, 212, 212, 0.959);
+    display: table;
+    text-align: center;
+    width: 80%;
+    height: 5rem;
+    margin: 10%;
+}
+
+.season-notice-todo{
+    /* background-color: rgb(196, 223, 221); */
+    background-color: rgba(101, 129, 129, 0.671); 
+    display: table;
+    width: 80%;
+    height: 5rem;
+    margin: 10%;    
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.season-notice-todo div{
+    vertical-align: middle;  
+    display: table-cell; 
+}
+
+.season-url{
+      
+}
+.season-crop{
+    padding-left: 10px;
+}
+.season-sow{
+
+}
+.season-plant{
+
+}
+.season-harvest{
+
+}

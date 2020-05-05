@@ -1,0 +1,25 @@
+{
+  "short_name": "My Homestead",
+  "name": "Help keep track of what is happening on your Homestead",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icons8-garden-shears-100.png",
+      "type": "image/png",
+      "sizes": "100x100"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#658181",
+  "background_color": "#72C89E"
+}
