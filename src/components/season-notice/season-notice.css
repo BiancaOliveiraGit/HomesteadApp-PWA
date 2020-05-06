@@ -2,6 +2,14 @@ body {
     background-color: #C4DFDD;
   }
 
+#loader.text-center.text-light{
+      font-size: 24px;
+      vertical-align: middle;
+      padding-top: 30%;
+     
+      color: white;
+}
+
 .season-notice-completed{
     background-color: rgba(218, 212, 212, 0.959);
     display: table;
