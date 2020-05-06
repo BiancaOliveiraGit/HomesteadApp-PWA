@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './components/header';
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import Navfooter from './components/footer-nav';
 import Seasons from './components/season-notice';
 
@@ -15,17 +15,21 @@ function App() {
   return (
     <div className="main">
       <Header status={onlineValue}/>
-      <div id="loader" className="text-center text-light" >
-      <FontAwesomeIcon className ='font-awesome' icon={faSpinner} />        
-        <p>Loading data ...</p>
-      </div>
       <Seasons />
-        <Navfooter />
+      <Navfooter />
       </div>
   );
 }
 
 export default App;
+
+/*
+      <div id="loader" className="text-center text-light" >
+      <FontAwesomeIcon className ='font-awesome' icon={faSpinner} />        
+        <p>Loading data ...</p>
+      </div>
+      */
+
 /*
  <div className="App" fluid={true}>
     <div id="loader" className="text-center text-light" >

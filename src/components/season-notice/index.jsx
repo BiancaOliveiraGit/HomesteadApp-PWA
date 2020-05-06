@@ -1,23 +1,54 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './season-notice.css';
 
 const Seasons = () => {
   const [hasError, setErrors] = useState(false);
   const [seasons, setSeasons] = useState([]);
-  //const [todaySeason, setTodaySeason] = useState('');
-
-  async function fetchSeasonData() {
-    const res = await fetch("https://homesteadfunctionapp.azurewebsites.net/homestead/api/v1/seasons");
-    res
-      .json()
-      .then(res => setSeasons(res))
-      .catch(err => setErrors(err));
-  }
 
   useEffect(() => {
+    let mounted = true;
+
+    const fetchSeasonData = async() => {
+      const res = await fetch("https://homesteadfunctionapp.azurewebsites.net/homestead/api/v1/seasons");    
+
+      // so here working out if have data saved in localStorage
+      const savedData = localStorage.getItem("homestead-seasonal-todo");
+      if(savedData) {
+        // set mount as false so it doesn't call azure
+        mounted = false;
+        setSeasons(JSON.parse(savedData));     
+      }
+
+      if(mounted) {
+        res.json()
+          .then(res => {
+            let data = res;
+            // save to state
+            setSeasons(data);
+            // save to localstorage
+            localStorage.setItem("homestead-seasonal-todo",JSON.stringify(data));           
+          })
+          .catch(err => setErrors(err));
+      }
+    };
+    // due to useEffect you put function to get data within useEffect
     fetchSeasonData();
+
+    return () => {
+      mounted = false;
+    }
   },[]);
   
+  // loading
+  if(seasons.length === 0) {
+      return <div id="loader" className="text-center text-light" >
+             <FontAwesomeIcon className ='font-awesome' icon={faSpinner} />        
+              <span>Loading data ...</span>
+             </div>
+  }
+
   // icon image sizes
   const height = 80;
   const width = 80;
@@ -38,10 +69,11 @@ const Seasons = () => {
   //getdate
   const today = new Date().getMonth() + 1;
   const todaySeason = seasonMonths.get(today);
-  //filter out all other seasons
 
+  //filters out all other seasons
   return(
       <div className='season-notice'>
+        <div className='title'><h2>{todaySeason.toUpperCase()}</h2></div>
           {!hasError ? (
             seasons.filter(data => data.season === todaySeason)
                   .map(data => {
@@ -57,7 +89,6 @@ const Seasons = () => {
                     );
                   })
           ) : (
-            //<p>Loading...</p>
             <span>Has error: {JSON.stringify(hasError)}</span>
           )}
 </div>
@@ -68,6 +99,8 @@ export default Seasons;
 //TODO -
 /*
   [] funky text
-  [] loading feature
-  [] use localStorage
+  [x] loading feature
+  [x] use localStorage
+  [] Title with current season & background pic of corresponding season
+  [] animate spinner on loading feature
 */
