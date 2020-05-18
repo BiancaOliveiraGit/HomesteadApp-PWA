@@ -1,30 +1,36 @@
 // online-toggle
-import React, { useState } from 'react';
-import './online-toggle.css'
+import React, { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button'
+import './online-toggle.css'
 
-
-export default function OnlineToggle(status) {
+const OnlineToggle = () => {
   
-    const [isStatusOnline, setStatusOnline] = useState(false);
-    setStatusOnline(status);
-    // useEffect(() => {
-    //     if (status) {
-    //         setOnline(status)
-    //     }
-    //   }, [isOnline, status]);
+    const [isStatusOnline, setIsStatusOnline] = useState(false);
+       
+    useEffect(() => {
+      GetStatus();
+      return () => {
+        // Clean up       
+      };
+    },[isStatusOnline]);
 
+    const GetStatus = () => {
+      if ('serviceWorker' in navigator) {
+        setIsStatusOnline(true);
+      }else {
+        setIsStatusOnline(false);
+      }
+    }
 
 	return (
         <div>
-            <Button id="online-btn" variant={isStatusOnline? "success" : "warning"}>
+            <Button id="online-btn" variant={isStatusOnline? "success" : "warning"}
+            onClick={GetStatus}>
             {isStatusOnline ? 'Online' : 'Offline'}
             </Button>
         </div>
-
-   
 		)
-}
+};export default OnlineToggle
 
 //not in use
 /*

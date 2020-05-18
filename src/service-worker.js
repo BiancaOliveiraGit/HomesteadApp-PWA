@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
+
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -21,17 +23,18 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
-      return;
-    }
-
-    window.addEventListener('load', () => {
+  // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  //   // The URL constructor is available in all browsers that support SW.
+  //   const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
+  //   if (publicUrl.origin !== window.location.origin) {
+  //     // Our service worker won't work if PUBLIC_URL is on a different origin
+  //     // from what our page is served on. This might happen if a CDN is used to
+  //     // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+  //     return;
+  //   }
+  if ('serviceWorker' in navigator) {
+      
+    window.addEventListener('load', (event) => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
@@ -43,8 +46,9 @@ export function register(config) {
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
+              'worker. To learn more, visit https://bit.ly/CRA-PWA' 
           );
+          
         });
       } else {
         // Is not localhost. Just register service worker
@@ -59,6 +63,7 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
+        console.log("New ServiceWorker Found");
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
@@ -69,10 +74,8 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
-              );
+
+              console.log('New content is available; please refresh.');
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -135,4 +138,90 @@ export function unregister() {
     });
   }
 }
+/*
+// need to copy&paste below code into service-worker.js in the build folder - eachtime after a build
+//static cache is handled by workbox only for the App Shell
 
+// SW Version
+const version = '1.0';
+
+const appAssets = [
+  'images/beans.jpg',
+  'images/broc.jpg',
+  'images/caps.jpg',
+  'images/corn.jpg',
+  'images/lettuce.jpg',
+  'images/radish.jpg',  
+  'images/tomatoe.jpg'
+];
+
+// SW Install
+self.addEventListener( 'install', e => {
+  e.waitUntil(
+      caches.open( `static-${version}` )
+          .then( cache => cache.addAll(appAssets) )
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        if (response) {
+          return response
+        }
+        return fetch(event.request).then(response => { 
+          // clone the response before it is discarded
+          const resClone = response.clone();
+          
+          caches.open(`static-${version}`).then((cache) => {  
+            if(response.url.match("https://homesteadfunctionapp.azurewebsites.net/homestead/api/v1/seasons")) {
+              cache.put(event.request,resClone );
+            }        
+          });
+          return response;
+        })
+      }
+    )
+  );
+});
+
+// Listen for message from client
+self.addEventListener('message', e => {
+
+    // Identify the message
+    if( e.data === 'update_self' ) {
+      self.skipWaiting();
+    }
+});
+
+// Listen for Notifications
+self.addEventListener( 'push', (e) => {
+  self.registration.showNotification( e.data.text() )
+})
+
+// notificationclose
+self.addEventListener('notificationclose', function(e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+
+  console.log('Closed notification: ' + primaryKey);
+});
+
+// notificationclick
+self.addEventListener('notificationclick', function(e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+  var action = e.action;
+ 
+  console.log(e);
+
+  if (action === 'close') {
+    notification.close();
+  } else {
+    clients.openWindow('http://www.example.com');
+    notification.close();
+  }
+});
+
+*/

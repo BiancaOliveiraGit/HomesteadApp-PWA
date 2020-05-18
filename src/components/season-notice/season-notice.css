@@ -5,9 +5,17 @@ body {
 #loader.text-center.text-light{
       font-size: 24px;
       vertical-align: middle;
-      padding-top: 30%;
-     
+      padding-top: 30%;   
       color: white;
+}
+
+.title{
+    font-family: "Roboto", sans-serif;
+    font-size: 60px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 2rem;
 }
 
 .season-notice-completed{
@@ -33,6 +41,10 @@ body {
 .season-notice-todo div{
     vertical-align: middle;  
     display: table-cell; 
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
 }
 
 .season-url{
