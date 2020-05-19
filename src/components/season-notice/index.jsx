@@ -47,7 +47,7 @@ const Seasons = () => {
              <FontAwesomeIcon className ='font-awesome' icon={faSpinner} />        
               <span>Loading data ...</span>
              </div>
-  }
+  }  
 
   // icon image sizes
   const height = 80;
@@ -91,7 +91,7 @@ const Seasons = () => {
           ) : (
             <span>Has error: {JSON.stringify(hasError)}</span>
           )}
-</div>
+  </div>
   );
 };
 export default Seasons;

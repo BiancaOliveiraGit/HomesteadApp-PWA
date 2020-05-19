@@ -11,12 +11,12 @@
 
 DONE
 ---------
-install azure service extension onto VScode
-Not much luck with installing webpack dev server
+[x] install azure service extension onto VScode
+[x] Not much luck with installing webpack dev server
 
 TODO
 ----------
-## setup manifest file for pwa
-## test with lighthouse to see what missing for pwa
-## setup app shell landing page
-## deploy app to azure
+[##] setup manifest file for pwa
+[##] test with lighthouse to see what missing for pwa
+[x] setup app shell landing page
+[##] deploy app to azure
