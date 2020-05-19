@@ -117,6 +117,7 @@ const subscribe = () => {
   };//)
 //}
 
+//Notification Listeners
     return(
         <div className='subscribe'>
             <Button id="subscribe-btn" variant={isSubscribed? "success" : "warning"} 
@@ -132,12 +133,12 @@ export default PushNotifications;
 /*
   TODO
   [x] css file
-  [] useEffect for changing state
+  [x] useEffect for changing state
   [x] button event
   [] disable button ?
 
     UPTO
-    [] test subscribtion
+    [] Display notifications
 */
 
 /*
@@ -148,27 +149,3 @@ export default PushNotifications;
 }
 */
 
-/*
-function displayNotification() {
-  if (Notification.permission == 'granted') {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      var options = {
-        body: 'Here is a notification body!',
-        icon: 'images/example.png',
-        vibrate: [100, 50, 100],
-        data: {
-          dateOfArrival: Date.now(),
-          primaryKey: 1
-        },
-        actions: [
-          {action: 'explore', title: 'Explore this new world',
-            icon: 'images/checkmark.png'},
-          {action: 'close', title: 'Close notification',
-            icon: 'images/xmark.png'},
-        ]
-      };
-      reg.showNotification('Hello world!', options);
-    });
-  }
-}
-*/

@@ -9,15 +9,19 @@ const OnlineToggle = () => {
        
     useEffect(() => {
       GetStatus();
-      return () => {
-        // Clean up       
-      };
-    },[isStatusOnline]);
+    },[]);
 
+    // TODO check if this is correct when deploy & turn off wifi
     const GetStatus = () => {
       if ('serviceWorker' in navigator) {
-        setIsStatusOnline(true);
-      }else {
+        navigator.serviceWorker.getRegistration('/app').then(function(registration) {
+          if(registration) {
+            setIsStatusOnline(true);
+          }else{
+            setIsStatusOnline(false);
+          }
+        });
+      } else {
         setIsStatusOnline(false);
       }
     }

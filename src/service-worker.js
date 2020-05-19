@@ -143,7 +143,7 @@ export function unregister() {
 //static cache is handled by workbox only for the App Shell
 
 // SW Version
-const version = '1.0';
+const version = '1.1';
 
 const appAssets = [
   'images/beans.jpg',
@@ -152,7 +152,8 @@ const appAssets = [
   'images/corn.jpg',
   'images/lettuce.jpg',
   'images/radish.jpg',  
-  'images/tomatoe.jpg'
+  'images/tomatoe.jpg',
+  'icons8-garden-shears-100.png'
 ];
 
 // SW Install
@@ -197,8 +198,24 @@ self.addEventListener('message', e => {
 
 // Listen for Notifications
 self.addEventListener( 'push', (e) => {
-  self.registration.showNotification( e.data.text() )
-})
+   var options = {
+        body: e.data.text(),
+        icon: 'icons8-garden-shears-100.png',
+        vibrate: [100, 50, 100],
+        data: {
+          dateOfArrival: Date.now(),
+          primaryKey: 1
+        },
+        actions: [
+          {action: 'discover', title: 'discover',
+            icon: 'icons8-garden-shears-100.png'},
+          {action: 'close', title: 'Close notification',
+            icon: 'images/xmark.png'},
+        ]
+      };
+
+  self.registration.showNotification('The Vegie Scoop', options )
+});
 
 // notificationclose
 self.addEventListener('notificationclose', function(e) {
@@ -218,10 +235,12 @@ self.addEventListener('notificationclick', function(e) {
 
   if (action === 'close') {
     notification.close();
-  } else {
-    clients.openWindow('http://www.example.com');
-    notification.close();
+  } 
+  
+  if(action === 'discover') {
+    console.log('action discover has been clicked - redirect to page');
   }
 });
+
 
 */
