@@ -44,7 +44,7 @@ const PushNotifications = () => {
    
 const SetSubscription = () => {
   if(serviceworker){
-    if(isSubscribed){
+    if(!isSubscribed){
       // try to subscribe
       subscribe();
     }else{
@@ -78,6 +78,20 @@ const getApplicationServerKey = () => {
     .then( key => new Uint8Array(key) )
 }
 */
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
 
 // Subscribe for push notifications
 const subscribe = () => {
@@ -86,13 +100,13 @@ const subscribe = () => {
 
   // Get applicationServerKey from push server
   //getApplicationServerKey().then( applicationServerKey => {
-  const key = new Uint8Array(publicKey);
+
     // Subscribe
-    serviceworker.pushManager.subscribe( {userVisibleOnly: true, key} )
+    serviceworker.pushManager.subscribe( {userVisibleOnly: true, applicationServerKey: urlB64ToUint8Array(publicKey)} )
       .then( res => res.toJSON() )
       .then( subscription => {
         console.log('Endpoint URL: ', subscription.endpoint);
-        
+        setIsSubscribed(true);
         // TODO Pass subscription to Azure server to store subscribtion
         /*fetch(`${serverUrl}/subscribe`, { method: 'POST', body: JSON.stringify(subscription) })
           .then(setIsSubscribed)
