@@ -153,6 +153,8 @@ const appAssets = [
   'images/lettuce.jpg',
   'images/radish.jpg',  
   'images/tomatoe.jpg',
+  'images/icons8-virtual-reality-100.png',
+  'images/icons8-close-program-96.png',
   'icons8-garden-shears-100.png'
 ];
 
@@ -208,9 +210,9 @@ self.addEventListener( 'push', (e) => {
         },
         actions: [
           {action: 'discover', title: 'discover',
-            icon: 'icons8-garden-shears-100.png'},
+            icon: 'images/icons8-virtual-reality-100.png'},
           {action: 'close', title: 'Close notification',
-            icon: 'images/xmark.png'},
+            icon: 'images/icons8-close-program-96.png'},
         ]
       };
 
